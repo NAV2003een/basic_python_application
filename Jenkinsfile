@@ -4,13 +4,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // This is the correct Jenkins pipeline 'git' step, not a shell command
-                git 'https://github.com/NAV2003een/basic_python_application.git'
+                // Always good to include `credentialsId` if your repo is private
+                git branch: 'main', url: 'https://github.com/NAV2003een/basic_python_application.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
+                bat 'pip install --upgrade pip' // optional but recommended
                 bat 'pip install -r requirements.txt'
             }
         }
@@ -32,4 +33,3 @@ pipeline {
         }
     }
 }
-

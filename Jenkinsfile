@@ -10,27 +10,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python --version'
-                bat 'python -m pip install --upgrade pip'
-                bat 'python -m pip install -r requirements.txt'
+                bat '"C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" --version'
+                bat '"C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install --upgrade pip'
+                bat '"C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Build') {
             steps {
                 bat '''
-                if not exist dist (
-                    mkdir dist
-                )
+                if not exist dist mkdir dist
                 copy *.py dist\\
-                python -m compileall dist
+                "C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m compileall dist
                 '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'python -m unittest discover'
+                bat '"C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m unittest discover'
             }
         }
     }

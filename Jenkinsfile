@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+                // This is the correct Jenkins pipeline 'git' step, not a shell command
                 git 'https://github.com/NAV2003een/basic_python_application.git'
             }
         }
@@ -31,3 +32,4 @@ pipeline {
         }
     }
 }
+

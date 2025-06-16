@@ -4,19 +4,29 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/your-python-test-app.git'
+                git 'https://github.com/NAV2003een/basic_python_application.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '''
+                if not exist dist mkdir dist
+                copy *.py dist\\
+                python -m compileall dist
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'python -m unittest discover'
+                bat 'python -m unittest discover'
             }
         }
     }
